@@ -73,6 +73,7 @@ return Application::configure(basePath: dirname(__DIR__))
 ```
 
 **Step 3: Install JWT Package**
+
 Install the php-open-source-saver/jwt-auth package:
 
 composer require php-open-source-saver/jwt-auth
@@ -90,12 +91,14 @@ php artisan jwt:secret
 
 Open .env and set:
 
+```base
 DB_CONNECTION=mysql
 DB_HOST=127.0.0.1
 DB_PORT=3306
 DB_DATABASE=laravel_jwt
 DB_USERNAME=root
 DB_PASSWORD=
+```
 (Change DB settings if needed)
 
 Run the migration command
@@ -103,6 +106,7 @@ Run the migration command
 php artisan migrate
 ```
 **Step 4: Configure Authentication Guard**
+
 Open config/auth.php and update the api guard to use jwt driver:
 
 ```base
@@ -164,6 +168,7 @@ Route::prefix('auth')->group(function () {
 });
 ```
 **Step 7: Create AuthController**
+
 Create an API controller to handle user registration, login, logout, and token refresh.
 
 Run:
@@ -259,6 +264,7 @@ Your API will run at http://localhost:8000.
 ## How to Use the API
 
 **1. Register User**
+
 URL: POST /api/auth/register
 
 ```base
@@ -309,6 +315,7 @@ URL: POST /api/auth/logout
 Headers: Authorization: Bearer {access_token}
 
 ## Conclusion
+
 You have now built a secure JWT authentication API using Laravel 12! This setup is ideal for web or mobile apps that require stateless authentication.
 
 You can extend this tutorial by adding roles, permissions, or social logins.
