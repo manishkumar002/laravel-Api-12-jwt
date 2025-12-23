@@ -174,7 +174,7 @@ Route::prefix('auth')->group(function () {
 Create an API controller to handle user registration, login, logout, and token refresh.
 
 ### Run:
-``base
+```base
 php artisan make:controller API/AuthController
 ```
 
