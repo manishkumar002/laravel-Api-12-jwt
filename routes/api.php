@@ -1,0 +1,52 @@
+<?php
+
+use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\API\AuthController;
+use App\Http\Controllers\API\UserController;
+use App\Http\Controllers\Api\RoleController;
+use App\Http\Controllers\Api\PermissionController;
+use App\Http\Controllers\Api\CategoryController;
+use App\Http\Controllers\Api\ProductController;
+use App\Http\Controllers\Api\SettingController;
+
+
+Route::prefix('auth')->group(function () {
+    Route::post('register', [AuthController::class, 'register']);
+    Route::post('login', [AuthController::class, 'login']);
+
+    Route::middleware('auth:api')->group(function () {
+        Route::get('profile', [AuthController::class, 'profile']);
+        Route::post('logout', [AuthController::class, 'logout']);
+        Route::post('refresh', [AuthController::class, 'refresh']);
+    });
+});
+
+Route::middleware('auth:api')->group(function () {
+    Route::get('/users', [UserController::class,'index']); // List users
+    Route::post('/users', [UserController::class,'store']); // Create user
+    Route::get('/users/{id}', [UserController::class,'show']); // Show user
+    Route::put('/users/{id}', [UserController::class,'update']); // Update user
+    Route::delete('/users/{id}', [UserController::class,'destroy']); // Delete user
+});
+
+Route::middleware('auth:api')->group(function () {
+    // Roles
+    Route::apiResource('roles', RoleController::class)->except(['create', 'edit']);
+
+    // Permissions
+    Route::get('/permissions', [PermissionController::class, 'index']);
+    Route::post('/permissions', [PermissionController::class, 'store']);
+});
+
+Route::middleware('auth:api')->group(function () {
+    Route::apiResource('categories', CategoryController::class)->except(['create', 'edit']);
+    Route::apiResource('products', ProductController::class)->except(['create', 'edit']);
+});
+
+Route::middleware('auth:api')->group(function () {
+    Route::get('/settings', [SettingController::class, 'index']);
+    Route::get('/settings/{key}', [SettingController::class, 'show']);
+    Route::post('/settings', [SettingController::class, 'store']);
+    Route::put('/settings/{key}', [SettingController::class, 'update']);
+    Route::delete('/settings/{key}', [SettingController::class, 'destroy']);
+});

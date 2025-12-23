@@ -1,0 +1,164 @@
+{
+	"info": {
+		"_postman_id": "a15279b2-ba2d-475b-ab92-888aef0f7190",
+		"name": "Settings",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "31945044"
+	},
+	"item": [
+		{
+			"name": "List Settings",
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "Authorization",
+						"value": "Bearer {{token}}",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "[\n  { \"key\": \"site_name\", \"value\": \"My Laravel App\" },\n  { \"key\": \"logo_url\", \"value\": \"https://example.com/logo.png\" }\n]"
+				},
+				"url": {
+					"raw": "{{base_url}}/settings",
+					"host": [
+						"{{base_url}}"
+					],
+					"path": [
+						"settings"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Create Setting",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Authorization",
+						"value": "Bearer {{token}}",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n  \"key\": \"site_name\",\n  \"value\": \"My Laravel API\"\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{base_url}}/settings",
+					"host": [
+						"{{base_url}}"
+					],
+					"path": [
+						"settings"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Get Specific Setting",
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "Authorization",
+						"value": "Bearer {{token}}",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n  \"key\": \"site_name\",\n  \"value\": \"My Laravel API\"\n}\n"
+				},
+				"url": {
+					"raw": "{{base_url}}/settings/site_name",
+					"host": [
+						"{{base_url}}"
+					],
+					"path": [
+						"settings",
+						"site_name"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Update Setting",
+			"request": {
+				"method": "PUT",
+				"header": [
+					{
+						"key": "Authorization",
+						"value": "Bearer {{token}}",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n  \"value\": \"Updated API App\"\n}\n",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{base_url}}/settings/site_name",
+					"host": [
+						"{{base_url}}"
+					],
+					"path": [
+						"settings",
+						"site_name"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Delete Setting",
+			"request": {
+				"method": "DELETE",
+				"header": [
+					{
+						"key": "Authorization",
+						"value": "Bearer {{token}}",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": ""
+				},
+				"url": {
+					"raw": "{{base_url}}/settings/site_name",
+					"host": [
+						"{{base_url}}"
+					],
+					"path": [
+						"settings",
+						"site_name"
+					]
+				}
+			},
+			"response": []
+		}
+	]
+}
