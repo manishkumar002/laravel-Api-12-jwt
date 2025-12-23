@@ -21,11 +21,13 @@ We will build a RESTful API in Laravel 12 with the following endpoints:
 
 **Endpoint	Method	Description**
 
+```base
 /api/auth/register	POST	Register a new user
 /api/auth/login	POST	User login and get JWT
 /api/auth/profile	POST	Get authenticated user info
 /api/auth/refresh	POST	Refresh the JWT token
 /api/auth/logout	POST	Logout user and invalidate token
+```
 
 **Step 1: Install Laravel 12**
 
