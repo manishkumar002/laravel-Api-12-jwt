@@ -2,37 +2,47 @@
 An API (Application Programming Interface) is a set of rules that allows different software applications to communicate with each other. APIs enable the backend server to provide data and services to frontend clients, such as websites or mobile apps.
 
 **What is JWT?**
+
 JSON Web Token (JWT) is a standard for securely transmitting information as a JSON object. It is self-contained, compact, and digitally signed. JWTs are commonly used to authenticate users in web and mobile applications, allowing the server to verify a user's identity without storing session information.
 
-**Why Use JWT in Laravel?
+**Why Use JWT in Laravel?**
+
 Stateless authentication — no need to store session data on the server.
 
 # Scalable and suitable for APIs.
 
 Can be used across different domains and platforms.
 
-# Secure transmission of user info.
+### Secure transmission of user info.
 
-# Tutorial Overview
+**Tutorial Overview**
+
 We will build a RESTful API in Laravel 12 with the following endpoints:
 
-# Endpoint	Method	Description
+**Endpoint	Method	Description**
+
 /api/auth/register	POST	Register a new user
 /api/auth/login	POST	User login and get JWT
 /api/auth/profile	POST	Get authenticated user info
 /api/auth/refresh	POST	Refresh the JWT token
 /api/auth/logout	POST	Logout user and invalidate token
-Step 1: Install Laravel 12
+
+**Step 1: Install Laravel 12**
+
 If you haven't already, install Laravel 12 via Composer:
 
 composer create-project laravel/laravel example-app
 cd example-app
-Step 2: Enable API and Customize Authentication Exception
+
+**Step 2: Enable API and Customize Authentication Exception**
+
 Laravel 12’s API routes need to be enabled. You can do this by running:
 
-php artisan install:api
+**php artisan install:api**
+
 Next, update the bootstrap/app.php file to customize the authentication exception response for API routes so unauthorized access returns a JSON response:
 
+```base
 <?php
 
 use Illuminate\Foundation\Application;
@@ -60,16 +70,24 @@ return Application::configure(basePath: dirname(__DIR__))
             }
         });
     })->create();
-Step 3: Install JWT Package
+```
+
+**Step 3: Install JWT Package**
 Install the php-open-source-saver/jwt-auth package:
 
 composer require php-open-source-saver/jwt-auth
 Publish the package configuration:
 
+```base
 php artisan vendor:publish --provider="PHPOpenSourceSaver\JWTAuth\Providers\LaravelServiceProvider"
+```
+
 Generate the JWT secret key (add to .env):
 
+```base
 php artisan jwt:secret
+```
+
 Open .env and set:
 
 DB_CONNECTION=mysql
@@ -81,10 +99,13 @@ DB_PASSWORD=
 (Change DB settings if needed)
 
 Run the migration command
+```base
 php artisan migrate
-Step 4: Configure Authentication Guard
+```
+**Step 4: Configure Authentication Guard**
 Open config/auth.php and update the api guard to use jwt driver:
 
+```base
 'guards' => [
     // other guards...
 
@@ -94,9 +115,12 @@ Open config/auth.php and update the api guard to use jwt driver:
         'hash' => false,
     ],
 ],
-Step 5: Update User Model
+```
+**Step 5: Update User Model**
+
 Edit app/Models/User.php to implement JWTSubject:
 
+```base
 <?php
 
 namespace App\Models;
@@ -119,9 +143,12 @@ class User extends Authenticatable implements JWTSubject
         return [];
     }
 }
-Step 6: Create API Routes
+```
+**Step 6: Create API Routes**
+
 Define API routes in routes/api.php:
 
+```base
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\API\AuthController;
 
@@ -135,11 +162,13 @@ Route::prefix('auth')->group(function () {
         Route::post('refresh', [AuthController::class, 'refresh']);
     });
 });
-Step 7: Create AuthController
+```
+**Step 7: Create AuthController**
 Create an API controller to handle user registration, login, logout, and token refresh.
 
 Run:
 
+```base
 php artisan make:controller API/AuthController
 
 Then, add the following code inside app/Http/Controllers/API/AuthController.php:
@@ -219,14 +248,20 @@ class AuthController extends Controller
         ]);
     }
 }
-Step 8: Run Laravel Server
+```
+**Step 8: Run Laravel Server**
+
+```base
 php artisan serve
+```
 Your API will run at http://localhost:8000.
 
-How to Use the API
-1. Register User
+## How to Use the API
+
+**1. Register User**
 URL: POST /api/auth/register
 
+```base
 Body:
 
 {
@@ -235,9 +270,12 @@ Body:
   "password": "12345678",
   "password_confirmation": "12345678"
 }
-2. Login User
+```
+**2. Login User**
+
 URL: POST /api/auth/login
 
+```base
 Body:
 
 {
@@ -251,22 +289,26 @@ Response:
   "token_type": "bearer",
   "expires_in": 3600
 }
-3. Get Profile
+```
+**3. Get Profile**
+
 URL: POST /api/auth/profile
 
 Headers: Authorization: Bearer {access_token}
 
-4. Refresh Token
+**4. Refresh Token**
+
 URL: POST /api/auth/refresh
 
 Headers: Authorization: Bearer {access_token}
 
-5. Logout
+**5. Logout**
+
 URL: POST /api/auth/logout
 
 Headers: Authorization: Bearer {access_token}
 
-Conclusion
+## Conclusion
 You have now built a secure JWT authentication API using Laravel 12! This setup is ideal for web or mobile apps that require stateless authentication.
 
 You can extend this tutorial by adding roles, permissions, or social logins.
