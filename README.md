@@ -1,7 +1,7 @@
 # What is an API?
 An API (Application Programming Interface) is a set of rules that allows different software applications to communicate with each other. APIs enable the backend server to provide data and services to frontend clients, such as websites or mobile apps.
 
-**What is JWT?
+**What is JWT?**
 JSON Web Token (JWT) is a standard for securely transmitting information as a JSON object. It is self-contained, compact, and digitally signed. JWTs are commonly used to authenticate users in web and mobile applications, allowing the server to verify a user's identity without storing session information.
 
 **Why Use JWT in Laravel?
