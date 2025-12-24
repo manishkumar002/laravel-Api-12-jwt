@@ -23,7 +23,7 @@ We will build a RESTful API in Laravel 12 with the following endpoints:
 
 ```base
 /api/auth/register	POST	Register a new user
-/api/auth/login	POST	User login and get JWT
+/api/auth/login 	POST	User login and get JWT
 /api/auth/profile	POST	Get authenticated user info
 /api/auth/refresh	POST	Refresh the JWT token
 /api/auth/logout	POST	Logout user and invalidate token
